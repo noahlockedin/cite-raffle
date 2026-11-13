@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LockedIn CITE raffle</title>
+  <meta name="description" content="Enter the LockedIn raffle at CITE.">
+  <style>
+    :root {
+      --navy: #0c2744;
+      --ink: #122033;
+      --muted: #5b6b7c;
+      --line: #d7dee7;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --accent: #1a5cad;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    main {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+    .brand {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      color: var(--navy);
+    }
+    .lede {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    form, .thanks {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    label, .label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+    .optional { font-weight: 500; color: var(--muted); }
+    input[type="text"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 12px;
+      font-size: 16px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    input:focus {
+      outline: 2px solid var(--accent);
+      border-color: var(--accent);
+    }
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 4px 0 14px;
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .check input { margin-top: 3px; flex: 0 0 auto; }
+    .sms {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+    .sms .fine {
+      margin: 0 0 0 26px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .hp { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+    button {
+      width: 100%;
+      border: 0;
+      background: var(--navy);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    button:disabled { opacity: 0.65; cursor: not-allowed; }
+    .error { color: #9b1c1c; font-size: 14px; margin: 0 0 12px; display: none; }
+    .thanks { display: none; }
+    .thanks h2 { margin: 0 0 8px; font-size: 22px; color: var(--navy); }
+    .thanks p { margin: 0; color: var(--muted); line-height: 1.45; }
+    footer {
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">LockedIn</div>
+    <h1>Enter to win [prize]</h1>
+    <p class="lede">Fill this in at the LockedIn CITE booth. Winners will be contacted at the email you provide.</p>
+    <p class="error" id="error"></p>
+    <form id="form" novalidate>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required maxlength="120">
+
+      <label for="school">School</label>
+      <input id="school" name="school" type="text" autocomplete="organization" required maxlength="160">
+
+      <label for="role">Role / title</label>
+      <input id="role" name="role" type="text" autocomplete="organization-title" required maxlength="120">
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required maxlength="160">
+
+      <label for="phone">Phone <span class="optional">(optional)</span></label>
+      <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+
+      <label class="check">
+        <input type="checkbox" name="demo" id="demo">
+        <span>Interested in a demo?</span>
+      </label>
+
+      <div class="sms">
+        <label class="check">
+          <input type="checkbox" name="smsOptIn" id="smsOptIn">
+          <span>Also text me about LockedIn and demo scheduling. This is optional and is not required to enter the raffle.</span>
+        </label>
+        <p class="fine">Message frequency: up to 8 messages per month. Msg &amp; data rates may apply. Reply STOP to opt out. Reply HELP for help. <a href="https://www.lockedinapp.co/privacy">Privacy policy</a>. <a href="https://www.lockedinapp.co/terms">Terms</a>.</p>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="company_website">Company website</label>
+        <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button type="submit" id="submit">Enter the raffle</button>
+    </form>
+    <div class="thanks" id="thanks">
+      <h2>You're in.</h2>
+      <p>We'll be in touch if you win. If you asked for a demo, a LockedIn teammate will follow up.</p>
+    </div>
+    <footer>
+      LockedIn Technologies, LLC. <a href="https://www.lockedinapp.co/privacy">Privacy policy</a> and <a href="https://www.lockedinapp.co/terms">terms</a>.
+    </footer>
+  </main>
+  <script>
+    const form = document.getElementById("form");
+    const thanks = document.getElementById("thanks");
+    const error = document.getElementById("error");
+    const submit = document.getElementById("submit");
+
+    function showError(message) {
+      error.textContent = message;
+      error.style.display = "block";
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      error.style.display = "none";
+      const data = Object.fromEntries(new FormData(form).entries());
+      data.demo = document.getElementById("demo").checked;
+      data.smsOptIn = document.getElementById("smsOptIn").checked;
+      if (!data.name || !data.school || !data.role || !data.email) {
+        showError("Please fill in your name, school, role, and email.");
+        return;
+      }
+      submit.disabled = true;
+      submit.textContent = "Submitting...";
+      try {
+        const res = await fetch("/api/enter", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok || !body.ok) {
+          throw new Error(body.error || "Something went wrong. Please try again.");
+        }
+        form.style.display = "none";
+        thanks.style.display = "block";
+      } catch (err) {
+        showError(err.message || "Something went wrong. Please try again.");
+        submit.disabled = false;
+        submit.textContent = "Enter the raffle";
+      }
+    });
+  </script>
+</body>
+</html>
